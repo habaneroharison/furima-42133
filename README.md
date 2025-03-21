@@ -1,24 +1,67 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## users table
 
-* Ruby version
+| Column             | Type                | Options                   |
+|--------------------|---------------------|---------------------------|
+| id                 | integer             |  主キー                    |
+| email              | string              | null: false, unique: true |
+| encrypted_password | string              | null: false               |
+| name               | string              | null: false               |
 
-* System dependencies
+### Association
+has_many :items 
+has_many :purchases
 
-* Configuration
+## items table
 
-* Database creation
+| Column             | Type                | Options                   |
+|--------------------|---------------------|---------------------------|
+| id                 | integer             | 主キー                     |
+| description        | text                | null: false               |
+| name               | string              | null: false               |
+| price              | integer             | null: false               |
+| category           | string              | null: false               |
+| status             | string              | null: false               |
+| shipping_fee       | integer             | null: false               |
+| user_id            | integer             | null: false,外部キー       |
 
-* Database initialization
+### Association
+belongs_to :user
+  has_one :purchase
+  has_one_attached :image
 
-* How to run the test suite
+## addresses table
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column             | Type                | Options                   |
+|--------------------|---------------------|---------------------------|
+| id                 | integer             | 主キー                     |
+| purchase_id        | integer             | null: false, 外部キー      |
+| postal_code        | string              | null: false               |
+| prefecture         | string              | null: false               |
+| city               | string              | null: false               |
+| address            | string              | null: false               |
+| building           | string              | 任意                      |
+| phone_number       | string              | null: false               |
 
-* Deployment instructions
+### Association
+belongs_to :purchase
 
-* ...
+
+## purchases table
+
+| Column             | Type                | Options                   |
+|--------------------|---------------------|---------------------------|
+| email              | string              | null: false, unique: true |
+| encrypted_password | string              | null: false               |
+| name               | string              | null: false               |
+| profile            | text                | null: false               |
+| occupation         | text                | null: false               |
+| position           | text                | null: false               |
+
+### Association
+
+belongs_to :user
+  belongs_to :item
+  has_one :address
