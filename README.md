@@ -12,7 +12,7 @@
 | first_name         | string              | null: false               |
 | last_name_kana     | string              | null: false               |
 | first_name_kana    | string              | null: false               |
-| birth_day_date     | data                | null: false               |
+| birth_day_date     | date                | null: false               |
 
 ### Association
 has_many :items 
@@ -26,11 +26,11 @@ has_many :purchases
 | name               | string              | null: false               |
 | price              | integer             | null: false               |
 | category_id        | integer             | null: false               |
-| status_id          | integer             | null:false                |
-| shipping_fee_id    | integer             | null:false                |
-| text               | text                | null: false               |
-| title              | string              | null: false               |
-| user               | references          | null: false,foreign_key:true|
+| status_id          | integer             | null: false                |
+| shipping_fee_id    | integer             | null: false                |
+| delivery_time_id   | integer             | null: false                |
+| shipping_source_id | integer             | null: false                |
+| user               | references          | null: false,foreign_key: true|
 
 ### Association
 belongs_to :user
@@ -41,7 +41,7 @@ belongs_to :user
 
 | Column             | Type                | Options                   |
 |--------------------|---------------------|---------------------------|
-| purchase           | references          | null: false,foreign_key:true|
+| purchase           | references          | null: false,foreign_key: true|
 | postal_code        | string              | null: false               |
 | prefecture_id      | integer             | null: false               |
 | city               | string              | null: false               |
@@ -55,8 +55,8 @@ belongs_to :purchase
 
 ## purchases table
 
-| Column             | Type                | Options                      |
-|--------------------|---------------------|------------------------------|
+| Column             | Type                |Options                      |
+|--------------------|---------------------------------------------------|
 | user               | references          | null: false,foreign_key: true|
 | item               | references          | null: false,foreign_key: true|
 
