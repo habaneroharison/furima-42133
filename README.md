@@ -29,7 +29,7 @@ has_many :purchases
 | status_id          | integer             | null: false                |
 | shipping_fee_id    | integer             | null: false                |
 | delivery_time_id   | integer             | null: false                |
-| shipping_source_id | integer             | null: false                |
+| prefecture_id      | integer             | null: false                |
 | user               | references          | null: false,foreign_key: true|
 
 ### Association
@@ -56,7 +56,7 @@ belongs_to :purchase
 ## purchases table
 
 | Column             | Type                |Options                      |
-|--------------------|---------------------------------------------------|
+|--------------------|---------------------|-----------------------------|
 | user               | references          | null: false,foreign_key: true|
 | item               | references          | null: false,foreign_key: true|
 
