@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'ユーザー新規登録' do
-    # ユーザー新規登録についてのテストコードを記述します  
+   
     it 'nicknameが空だと登録できない' do
       user = User.new(nickname: '', email: 'test@example', password: 'test000', password_confirmation: 'test000', last_name: 'てすと', first_name:'てすと', last_name_kana:'テスト', first_name_kana:'テスト', birth_day_date:'1935-10-10')
       user.valid?
