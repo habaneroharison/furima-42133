@@ -6,12 +6,12 @@ class User < ApplicationRecord
 
          validates :nickname, presence: { message: "can't be blank" }
          
-         validates :password,  format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: "Password is invalid. Include both letters and numbers" }
+         validates :password,  format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: "is invalid. Include both letters and numbers" }
 
          validates :birth_day_date, presence: { message: "can't be blank" }
        
          validates :last_name, presence: { message: "can't be blank" },
-                               format: { with: /\A[一-龯ぁ-んァ-ヶー々]+\z/, message: "kana is invalid. Input full-width characters" }
+                               format: { with: /\A[一-龯ぁ-んァ-ヶー々]+\z/, message: "is invalid. Input full-width characters" }
          validates :first_name, presence: { message: "can't be blank" },
                                 format: { with: /\A[一-龯ぁ-んァ-ヶー々]+\z/, message: "is invalid. Input full-width characters" }
          validates :last_name_kana, presence: { message: "can't be blank" },
