@@ -4,11 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, presence: true
-  validates :last_name, presence: true, format: { with: /\A[一-龯ぁ-んァ-ヶー々]+\z/
-  validates :first_name, presence: true, format: { with: /\A[一-龯ぁ-んァ-ヶー々]+\z/
-  validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー]+\z/
-  validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー]+\z/
-  validates :birth_day_date, presence: true
+         validates :nickname, presence: { message: "can't be blank" }
+         
+         validates :password,  format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: "Password is invalid. Include both letters and numbers" }
 
-end
+         validates :birth_day_date, presence: { message: "can't be blank" }
+       
+         validates :last_name, presence: { message: "can't be blank" },
+                               format: { with: /\A[一-龯ぁ-んァ-ヶー々]+\z/, message: "kana is invalid. Input full-width characters" }
+         validates :first_name, presence: { message: "can't be blank" },
+                                format: { with: /\A[一-龯ぁ-んァ-ヶー々]+\z/, message: "is invalid. Input full-width characters" }
+         validates :last_name_kana, presence: { message: "can't be blank" },
+                                    format: { with: /\A[ァ-ヶー]+\z/, message: "Input full-width katakana characters" }
+         validates :first_name_kana, presence: { message: "can't be blank" },
+                                     format: { with: /\A[ァ-ヶー]+\z/, message: "Input full-width katakana characters" }
+       end
+
+
