@@ -8,11 +8,11 @@ class Item < ApplicationRecord
   # バリデーション設定
   validates :name, presence: { message: "can't be blank" }
   validates :description, presence: { message: "can't be blank" }
-  validates :category_id, presence: { message: "can't be blank" }
-  validates :status_id, presence: { message: "can't be blank" }
-  validates :shipping_fee_id, presence: { message: "can't be blank" }
+  validates :category_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
+  validates :status_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
+  validates :shipping_fee_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
   validates :prefecture_id, presence: { message: "can't be blank" }
-  validates :delivery_time_id, presence: { message: "can't be blank" }
+  validates :delivery_time_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
   validates :price, presence: { message: "can't be blank" }
   validates :image, presence: { message: "can't be blank" }
   
