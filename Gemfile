@@ -73,3 +73,4 @@ group :production do
   gem 'pg'
 end
 gem 'devise'
+gem 'active_hash'
