@@ -1,22 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const priceInput = document.getElementById('item-price');
-  const taxPriceDisplay = document.getElementById('add-tax-price');
-  const profitDisplay = document.getElementById('profit');
+const price = () => {
+  
+    const priceInput = document.getElementById("item-price");
+    const addTaxDom = document.getElementById("add-tax-price");
+    const profitDom = document.getElementById("profit");
 
-  priceInput.addEventListener('input', function() {
-    const price = parseFloat(priceInput.value);
-    if (isNaN(price)) {
-      taxPriceDisplay.textContent = '';
-      profitDisplay.textContent = '';
-      return;
-    }
-
-    // 価格が入力されていれば計算を実行
-    const tax = price * 0.1;  // 販売手数料（10%）
-    const profit = price - tax;  // 販売利益
-
-    // 表示を更新
-    taxPriceDisplay.textContent = Math.floor(tax);  // 手数料
-    profitDisplay.textContent = Math.floor(profit);  // 利益
-  });
-});
+    priceInput.addEventListener("input", () => {
+      const inputValue = document.getElementById("item-price").value;
+        addTaxDom.innerHTML = Math.floor(inputValue * 0.1).toLocaleString();
+        profitDom.innerHTML = Math.floor(inputValue - inputValue * 0.1).toLocaleString();
+    })
+  };
+  window.addEventListener("turbo:load", price);
+  window.addEventListener("turbo:render", price);

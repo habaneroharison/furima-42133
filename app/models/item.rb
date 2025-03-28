@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   validates :category_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
   validates :status_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
   validates :shipping_fee_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
-  validates :prefecture_id, presence: { message: "can't be blank" }
+  validates :prefecture_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
   validates :delivery_time_id, inclusion: { in: 2..Float::INFINITY, message: "can't be blank" }
   validates :price, presence: { message: "can't be blank" }
   validates :image, presence: { message: "can't be blank" }
@@ -27,7 +27,7 @@ class Item < ApplicationRecord
     less_than_or_equal_to: 9999999, 
     message: "must be less than or equal to 9999999" 
   }
-  # 価格に関するバリデーション: 半角数値のみ許可
+  #  半角数値のみ許可
   validates :price, numericality: { only_integer: true, message: "is not a number" }
   # ActiveStorageで画像を管理
   has_one_attached :image
