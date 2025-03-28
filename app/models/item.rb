@@ -5,13 +5,13 @@ class Item < ApplicationRecord
 
   belongs_to :user
   belongs_to_active_hash :category
-  belongs_to_active_hash :condition
+  belongs_to_active_hash :status
   belongs_to_active_hash :shipping_fee
   belongs_to_active_hash :prefecture
-  belongs_to_active_hash :shipping_day
+  belongs_to_active_hash :delivery_time
 
   # バリデーション設定
-  validates :user, presence: true
+  
   validates :name, presence: { message: "can't be blank" }
   validates :description, presence: { message: "can't be blank" }
   validates :category_id, inclusion: { in: 2..11, message: "can't be blank" }

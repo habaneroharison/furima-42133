@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @item = FactoryBot.build(:item) # FactoryBotでItemのテストデータを作成
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.build(:item, user: @user)
   end
 
   describe '商品出品のバリデーション' do
@@ -87,8 +88,10 @@ RSpec.describe Item, type: :model do
 
       it '画像が空では保存できない' do
         @item.image = nil
+        @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
       end
     end
   end
