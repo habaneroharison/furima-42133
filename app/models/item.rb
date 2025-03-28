@@ -2,7 +2,8 @@ class Item < ApplicationRecord
 
   # ActiveHash関連付けを追加
   extend ActiveHash::Associations::ActiveRecordExtensions
-  
+
+  belongs_to :user
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
   belongs_to_active_hash :shipping_fee
@@ -35,5 +36,5 @@ class Item < ApplicationRecord
   validates :price, numericality: { only_integer: true, message: "is not a number" }
   # ActiveStorageで画像を管理
   has_one_attached :image
-
+  
 end
