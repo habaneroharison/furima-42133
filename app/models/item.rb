@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_day
 
   # バリデーション設定
+  validates :user, presence: true
   validates :name, presence: { message: "can't be blank" }
   validates :description, presence: { message: "can't be blank" }
   validates :category_id, inclusion: { in: 2..11, message: "can't be blank" }
