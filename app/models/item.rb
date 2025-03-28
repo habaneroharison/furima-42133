@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
 
   # ActiveHash関連付けを追加
-  include ActiveHash::Associations::ActiveRecordExtensions
+  extend ActiveHash::Associations::ActiveRecordExtensions
   
 
 
