@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
     
     @items = Item.order(created_at: :desc)
   end
+  
   def new
     @item = Item.new
   end
@@ -12,7 +13,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
   end
-  
+
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -21,6 +22,18 @@ class ItemsController < ApplicationController
       render :new, status: :unprocessable_entity 
     end
   end
+    def edit
+      @item = Item.find(params[:id])
+    end
+  
+    def update
+      @item = Item.find(params[:id])
+      if @item.update(item_params)
+        redirect_to @item
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
 
   private
 
