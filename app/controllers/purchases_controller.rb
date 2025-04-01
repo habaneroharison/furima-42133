@@ -1,17 +1,24 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  before_action :redirect_if_seller, only: [:index, :create]
 
   def index
-    @purchase_form = PurchaseForm.new
-  end 
+    if user_signed_in?
+      @purchase_form = PurchaseForm.new
+    else
+      redirect_to root_path
+    end
+  end
 
   def create
     @purchase_form = PurchaseForm.new(purchase_params)
-    if @purchase_form.save
+    if @purchase_form.valid?
+      pay_item
+      @purchase_form.save
       redirect_to root_path
     else
-      render :index, status: :unprocessable_entity
+      render :new
     end
   end
 
@@ -23,6 +30,12 @@ class PurchasesController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     # Itemが見つからない場合、アイテム一覧にリダイレクト
     redirect_to items_path
+  end
+
+  def redirect_if_seller
+    if current_user == @item.user
+      redirect_to root_path
+    end
   end
 
   def purchase_params
