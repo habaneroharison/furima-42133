@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
+  has_one :purchase
   belongs_to_active_hash :category
   belongs_to_active_hash :status
   belongs_to_active_hash :shipping_fee
@@ -11,13 +12,13 @@ class Item < ApplicationRecord
   belongs_to_active_hash :delivery_time
 
   # バリデーション設定
-  
+
   validates :name, presence: { message: "can't be blank" }
   validates :description, presence: { message: "can't be blank" }
   validates :category_id, inclusion: { in: 2..11, message: "can't be blank" }
   validates :status_id, inclusion: { in: 2..7, message: "can't be blank" }
   validates :shipping_fee_id, inclusion: { in: 2..3, message: "can't be blank" }
-  validates :prefecture_id, inclusion: { in: 2..48, message: "can't be blank" } # 都道府県は47
+  validates :prefecture_id, inclusion: { in: 2..48, message: "can't be blank" } 
   validates :delivery_time_id, inclusion: { in: 2..4, message: "can't be blank" }
   validates :price, presence: { message: "can't be blank" }
   validates :image, presence: { message: "can't be blank" }

@@ -5,7 +5,7 @@ class PurchaseForm
   validates :user_id, presence: { message: "can't be blank" }
   validates :item_id, presence: { message: "can't be blank" }
   validates :postal_code, presence: { message: "can't be blank" }, format: { with: /\A\d{3}-\d{4}\z/, message: "must be in the format 123-4567" }
-  validates :prefecture_id, inclusion: { in: 2..48, message: "can't be blank" } # ActiveHashの初期値1を除外
+  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :city, presence: { message: "can't be blank" }
   validates :address, presence: { message: "can't be blank" }
   validates :phone_number, presence: { message: "can't be blank" }, format: { with: /\A\d{10,11}\z/, message: "must be 10 or 11 digits" }
