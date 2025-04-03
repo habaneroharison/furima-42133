@@ -4,6 +4,7 @@ class PurchasesController < ApplicationController
   before_action :redirect_if_seller, only: [:index, :create]
 
   def index
+    @purchase_form = PurchaseForm.new
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     
      
