@@ -5,11 +5,8 @@ class PurchasesController < ApplicationController
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    if user_signed_in?
-      @purchase_form = PurchaseForm.new
-    else
-      redirect_to root_path
-    end
+    
+     
   end
 
   def create
@@ -49,7 +46,7 @@ class PurchasesController < ApplicationController
   end
 
   def redirect_if_seller
-    if current_user == @item.user
+    if current_user == @item.user || @item.purchase.present?
       redirect_to root_path
     end
   end

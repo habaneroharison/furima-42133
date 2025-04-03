@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe PurchaseForm, type: :model do
   before do
-    @purchase_form = FactoryBot.build(:purchase_form)
+    user = FactoryBot.create(:user)   # DBに保存
+    item = FactoryBot.create(:item, user: user)  # item の出品者を user に設定
+    @purchase_form = FactoryBot.build(:purchase_form, user_id: user.id, item_id: item.id)
   end
-
   describe '購入情報の保存' do
     context '購入ができる場合' do
       it 'すべての情報が正しく入力されていれば保存できる' do
@@ -19,13 +20,13 @@ RSpec.describe PurchaseForm, type: :model do
 
     context '購入ができない場合' do
       it 'user_idが空では保存できない' do
-        @purchase_form.user_id = nil
+        @purchase_form.user_id = ''
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include("User can't be blank")
       end
 
       it 'item_idが空では保存できない' do
-        @purchase_form.item_id = nil
+        @purchase_form.item_id = ''
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include("Item can't be blank")
       end
